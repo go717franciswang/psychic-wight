@@ -34,9 +34,9 @@
     (do
       (println x y (next-z (next-x x) (next-y y)))
       true)
-    (let [x (mod (+ (* x 2) 5) p)
-          y (mod (+ (* y 3) 7) p)]
-      (if (= (bit-xor x y) (get output i))
+    (let [x (next-x x)
+          y (next-y y)]
+      (if (= (next-z x y) (get output i))
         (recur x y (inc i))
         false))))
 
