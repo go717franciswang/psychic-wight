@@ -40,6 +40,7 @@
         (recur x y (inc i))
         false))))
 
+; there must be a better method but it produces the solution under a minute
 (loop [x0 0]
   (let [y0 (bit-xor x0 (first output))]
     (if (validate x0 y0 1)
