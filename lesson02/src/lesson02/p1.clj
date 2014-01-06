@@ -1,4 +1,4 @@
-(ns lesson02.core
+(ns lesson02.p1
   (:import [java.security MessageDigest]))
 
 (defn sha256 [message]
@@ -35,6 +35,7 @@
               (.put hash-msg h msg)
               (recur (inc i)))))))))
 
-(time
-  (birth-day-attack))
+(defn main []
+  (time
+    (birth-day-attack)))
 
