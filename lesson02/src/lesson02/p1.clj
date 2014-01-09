@@ -14,28 +14,35 @@
         first-byte (mod (first h) 4)]
     (apply str (map #(format "%02x" %) (conj (rest h) first-byte)))))
 
-(println (sha256-truncated "abc"))
-(println (sha256 "abc"))
-
 (defn gen-rand-str []
   (str (rand)))
 
 (defn birth-day-attack []
-  (let [iterations (int (* 1.2 (Math/pow 2 25)))
+  (let [iterations 10000000
         hash-msg (java.util.HashMap. {})]
     (println "running" iterations "iterations")
     (loop [i 0]
-      (when (zero? (mod i 100000)) (println i))
-      (when (< i iterations)
+      (if (< i iterations)
         (let [msg (gen-rand-str)
               h (sha256-truncated msg)]
           (if (.containsKey hash-msg h)
-            [(.get hash-msg h) msg]
+            (do 
+              (println [(.get hash-msg h) msg])
+              true)
             (do 
               (.put hash-msg h msg)
-              (recur (inc i)))))))))
+              (recur (inc i)))))
+        false))))
 
 (defn main []
   (time
-    (birth-day-attack)))
+    (do
+      (println (sha256-truncated "0.08622480981330949"))
+      (println (sha256-truncated "0.3486294390628166"))
+
+      (println (sha256 "0.08622480981330949"))
+      (println (sha256 "0.3486294390628166"))
+
+      (while (not (birth-day-attack))
+        (println "attempt failed after 10mil tries")))))
 

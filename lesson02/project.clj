@@ -8,5 +8,8 @@
                  [java-jdbc/dsl "0.1.0"]
                  [org.clojure/java.jdbc "0.3.2"]
                  [org.xerial/sqlite-jdbc "3.7.2"]]
-  :jvm-opts ["-Xmx2G"])
+  :jvm-opts ["-Xmx2G" "-Xms2G"]
+  :main lesson02.p1/main
+  )
+
   ;:main [lesson02.p1-sqlite/main])
